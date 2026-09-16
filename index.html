@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="violet">
+<html lang="zh-TW" data-theme="violet">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Personal Dashboard with real-time live clock, dynamic greeting, day progress, and customizable themes.">
-  <title>Personal Hub • Live Time & Dashboard</title>
+  <meta name="description" content="hiskdk's Personal Page • Profile, Skills, Projects, and Live Real-Time Clock">
+  <title>hiskdk | Personal Page • Live Clock</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,32 +21,39 @@
     <header class="top-nav">
       <div class="brand-badge">
         <span class="status-indicator"></span>
-        <span class="brand-text">Personal Space</span>
+        <span class="brand-text">DIC-1 // PERSONAL PAGE</span>
       </div>
 
       <!-- Theme Switcher & Settings -->
       <div class="nav-actions">
-        <div class="theme-picker" id="themePicker" title="Change Theme Palette">
-          <button class="theme-dot active" data-theme="violet" aria-label="Violet Theme" style="--dot-color: #8b5cf6;"></button>
-          <button class="theme-dot" data-theme="cyan" aria-label="Cyan Aurora Theme" style="--dot-color: #06b6d4;"></button>
-          <button class="theme-dot" data-theme="amber" aria-label="Sunset Amber Theme" style="--dot-color: #f59e0b;"></button>
-          <button class="theme-dot" data-theme="emerald" aria-label="Emerald Matrix Theme" style="--dot-color: #10b981;"></button>
+        <div class="theme-picker" id="themePicker" title="切換色彩風格">
+          <button class="theme-dot active" data-theme="violet" aria-label="星雲紫" style="--dot-color: #8b5cf6;"></button>
+          <button class="theme-dot" data-theme="cyan" aria-label="極光青" style="--dot-color: #06b6d4;"></button>
+          <button class="theme-dot" data-theme="amber" aria-label="落日金" style="--dot-color: #f59e0b;"></button>
+          <button class="theme-dot" data-theme="emerald" aria-label="矩陣綠" style="--dot-color: #10b981;"></button>
         </div>
 
-        <button class="icon-btn" id="formatToggleBtn" title="Toggle 12h / 24h format" aria-label="Toggle 12h/24h format">
+        <button class="icon-btn" id="formatToggleBtn" title="切換 12H / 24H 格式" aria-label="切換時間格式">
           <span class="format-badge" id="formatBadge">24H</span>
+        </button>
+
+        <button class="icon-btn edit-nav-btn" id="navEditBtn" title="編輯個人資料">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+          </svg>
+          <span class="edit-nav-text">編輯個人資料</span>
         </button>
       </div>
     </header>
 
     <!-- Main Content Grid -->
     <main class="dashboard-grid">
-      <!-- Profile & Welcome Section -->
+      <!-- 1. Profile Section -->
       <section class="glass-card profile-card" id="profileCard">
         <div class="profile-header">
           <div class="avatar-ring">
             <div class="avatar-glow"></div>
-            <div class="avatar-inner" id="avatarLetter">A</div>
+            <div class="avatar-inner" id="avatarLetter">H</div>
           </div>
           <div class="greeting-content">
             <div class="greeting-tag">
@@ -54,14 +61,15 @@
               <span class="greeting-text" id="greetingText">Good Morning</span>
             </div>
             <div class="name-wrapper">
-              <h1 class="user-name" id="userName" title="Click to edit name" tabindex="0">Alex Morgan</h1>
-              <button class="edit-name-btn" id="editNameBtn" aria-label="Edit display name" title="Edit your name">
+              <h1 class="user-name" id="userName" title="點擊直接修改資料" tabindex="0">hiskdk</h1>
+              <button class="edit-name-btn" id="editNameBtn" aria-label="編輯個人資訊" title="點擊編輯資料">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                 </svg>
               </button>
             </div>
-            <p class="tagline" id="tagline">Welcome back to your personal sanctuary</p>
+            <p class="user-dept" id="userDept">資訊工程系 • AIoT & Embedded Intelligence</p>
+            <p class="tagline" id="tagline">熱愛物聯網與智慧系統開發，致力於探索軟硬整合與現代 Web 互動體驗。</p>
           </div>
         </div>
 
@@ -87,12 +95,12 @@
 
           <div class="stat-pill live-badge">
             <span class="pulse-dot"></span>
-            <span>LIVE SYNC</span>
+            <span>LIVE REALTIME</span>
           </div>
         </div>
       </section>
 
-      <!-- Hero Real-Time Clock Display -->
+      <!-- 2. Hero Real-Time Clock Display -->
       <section class="glass-card time-hero-card" id="timeCard">
         <div class="time-header">
           <div class="section-label">
@@ -100,9 +108,9 @@
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
-            <span>CURRENT TIME</span>
+            <span>即時數位時鐘 • LIVE CLOCK</span>
           </div>
-          <span class="timezone-chip" id="gmtOffsetChip">UTC+00:00</span>
+          <span class="timezone-chip" id="gmtOffsetChip">UTC+08:00</span>
         </div>
 
         <div class="clock-display-group">
@@ -128,7 +136,7 @@
         <div class="progress-section">
           <div class="progress-item">
             <div class="progress-meta">
-              <span class="progress-title">Today's Journey</span>
+              <span class="progress-title">今日時間進度 (Today's Journey)</span>
               <span class="progress-percent" id="dayPercent">0%</span>
             </div>
             <div class="progress-bar-track">
@@ -138,7 +146,7 @@
 
           <div class="progress-item">
             <div class="progress-meta">
-              <span class="progress-title">Year Progress</span>
+              <span class="progress-title">今年度累計進度 (Year Progress)</span>
               <span class="progress-percent" id="yearPercent">0%</span>
             </div>
             <div class="progress-bar-track">
@@ -148,20 +156,19 @@
         </div>
       </section>
 
-      <!-- Analog Clock Visual Card -->
+      <!-- 3. Analog Chronometer Widget -->
       <section class="glass-card analog-card" id="analogCard">
         <div class="section-label">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
             <path d="M12 2a10 10 0 1 0 10 10"></path>
           </svg>
-          <span>CHRONOMETER</span>
+          <span>指針時鐘 • CHRONOMETER</span>
         </div>
 
         <div class="analog-clock-container">
           <div class="analog-clock" id="analogClock">
             <div class="clock-face">
-              <!-- Hour marks generated via CSS / markup -->
               <span class="clock-dial-mark mark-12">12</span>
               <span class="clock-dial-mark mark-3">3</span>
               <span class="clock-dial-mark mark-6">6</span>
@@ -178,40 +185,177 @@
 
         <div class="analog-footer">
           <span class="mil-time" id="militaryTime">10:00:00 UTC+8</span>
-          <span class="clock-tick-status">Continuous Sweep</span>
+          <span class="clock-tick-status">60 FPS 柔順掃秒</span>
         </div>
       </section>
 
-      <!-- Quick Launch & Focus Dock -->
+      <!-- 4. Technical Skills Section -->
+      <section class="glass-card skills-card" id="skillsCard">
+        <div class="section-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+          <span>專業技術與技能 • TECHNICAL SKILLS</span>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-item">
+            <div class="skill-top">
+              <div class="skill-icon-wrap python-icon">🐍</div>
+              <div class="skill-info">
+                <h4>Python & 資料科學</h4>
+                <p>資料分析、自動化腳本、機器學習與 API 串接</p>
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">NumPy</span>
+              <span class="tag">Automation</span>
+              <span class="tag">FastAPI</span>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-top">
+              <div class="skill-icon-wrap cpp-icon">⚡</div>
+              <div class="skill-info">
+                <h4>C / C++ & 嵌入式系統</h4>
+                <p>微控制器開發、硬體感測器驅動、低功耗運算</p>
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">Arduino</span>
+              <span class="tag">ESP32</span>
+              <span class="tag">FreeRTOS</span>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-top">
+              <div class="skill-icon-wrap web-icon">🌐</div>
+              <div class="skill-info">
+                <h4>Web 前端與現代介面</h4>
+                <p>HTML5 語意化、毛玻璃 CSS 視覺特效、JavaScript</p>
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">HTML5</span>
+              <span class="tag">Glassmorphism</span>
+              <span class="tag">JavaScript ES6</span>
+            </div>
+          </div>
+
+          <div class="skill-item">
+            <div class="skill-top">
+              <div class="skill-icon-wrap aiot-icon">🤖</div>
+              <div class="skill-info">
+                <h4>AIoT 邊緣計算與物聯網</h4>
+                <p>感測節點數據採集、MQTT 通訊協議、邊緣端智慧分析</p>
+              </div>
+            </div>
+            <div class="skill-tags">
+              <span class="tag">IoT Protocols</span>
+              <span class="tag">MQTT</span>
+              <span class="tag">Edge AI</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Featured Projects Section -->
+      <section class="glass-card projects-card" id="projectsCard">
+        <div class="section-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+          <span>專案作品集 • FEATURED PROJECTS</span>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <div class="project-card">
+            <div class="project-badge">已完成專案</div>
+            <h3 class="project-title">Smart AIoT Real-Time Chronometer & Personal Hub</h3>
+            <p class="project-desc">
+              結合高精度即時數位與指針時鐘的現代個人儀表板，支援 12H/24H 切換、時區與進度感知，並具備即時個人資料編輯功能。
+            </p>
+            <div class="project-meta">
+              <div class="project-techs">
+                <span class="tech-pill">HTML5</span>
+                <span class="tech-pill">CSS3 Glassmorphism</span>
+                <span class="tech-pill">Vanilla JS</span>
+                <span class="tech-pill">Web Audio</span>
+              </div>
+              <a href="https://github.com/hiskdk/clock" target="_blank" rel="noopener noreferrer" class="project-link">
+                <span>GitHub 倉庫</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="project-card">
+            <div class="project-badge planning">本學期預計專案</div>
+            <h3 class="project-title">ESP32 環境感測物聯網邊緣節點 (IoT Telemetry Node)</h3>
+            <p class="project-desc">
+              利用 ESP32 微控制器採集環境溫濕度與光照數據，透過 MQTT 協定實時回傳至雲端監控端點，具備低功耗休眠與異常警報機制。
+            </p>
+            <div class="project-meta">
+              <div class="project-techs">
+                <span class="tech-pill">C++</span>
+                <span class="tech-pill">ESP32</span>
+                <span class="tech-pill">MQTT</span>
+                <span class="tech-pill">Sensors</span>
+              </div>
+              <a href="https://github.com/hiskdk/clock" target="_blank" rel="noopener noreferrer" class="project-link">
+                <span>專案規劃中</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 14 14"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Quick Launch & Focus Dock -->
       <section class="glass-card dock-card" id="dockCard">
         <div class="section-label">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
           </svg>
-          <span>QUICK ACTIONS</span>
+          <span>快捷操作 • QUICK ACTIONS</span>
         </div>
 
         <div class="dock-actions">
-          <button class="dock-item" id="copyTimeBtn" title="Copy current timestamp">
+          <button class="dock-item" id="copyTimeBtn" title="複製當前時間戳記">
             <div class="dock-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
               </svg>
             </div>
-            <span class="dock-label">Copy Time</span>
+            <span class="dock-label">複製時間戳記</span>
           </button>
 
-          <button class="dock-item" id="focusModeBtn" title="Toggle Fullscreen Focus Clock">
+          <button class="dock-item" id="focusModeBtn" title="切換全螢幕專注時鐘">
             <div class="dock-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
               </svg>
             </div>
-            <span class="dock-label">Focus Mode</span>
+            <span class="dock-label">專注全螢幕</span>
           </button>
 
-          <button class="dock-item" id="soundToggleBtn" title="Toggle gentle clock chime / ticks">
+          <button class="dock-item" id="soundToggleBtn" title="切換溫和的鐘擺聲響">
             <div class="dock-icon" id="soundIcon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="1" y1="1" x2="23" y2="23"></line>
@@ -221,29 +365,29 @@
                 <line x1="8" y1="23" x2="16" y2="23"></line>
               </svg>
             </div>
-            <span class="dock-label" id="soundLabel">Sound Off</span>
+            <span class="dock-label" id="soundLabel">音效關閉</span>
           </button>
 
-          <button class="dock-item" id="quoteRefreshBtn" title="Inspire me">
+          <button class="dock-item" id="quoteRefreshBtn" title="每日靈感切換">
             <div class="dock-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"></path>
               </svg>
             </div>
-            <span class="dock-label">New Spark</span>
+            <span class="dock-label">靈感火花</span>
           </button>
         </div>
 
         <div class="quote-container">
-          <p class="quote-text" id="quoteText">"Time is not what we spend, but the canvas on which we craft our lives."</p>
-          <span class="quote-author" id="quoteAuthor">— Daily Reflection</span>
+          <p class="quote-text" id="quoteText">"時間不是我們所花費的事物，而是我們塑造生命與創造價值的畫布。"</p>
+          <span class="quote-author" id="quoteAuthor">— 每日反思</span>
         </div>
       </section>
     </main>
 
     <!-- Footer -->
     <footer class="app-footer">
-      <p>Designed with precision • Instant Live Updates • <span id="localTimestampSmall"></span></p>
+      <p>DIC-1 Personal Page Project • <a href="https://github.com/hiskdk/clock" target="_blank" rel="noopener noreferrer" style="color:var(--accent-primary);text-decoration:none;">GitHub @hiskdk/clock</a> • <span id="localTimestampSmall"></span></p>
     </footer>
   </div>
 
@@ -252,25 +396,37 @@
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polyline points="20 6 9 17 4 12"></polyline>
     </svg>
-    <span id="toastMessage">Copied to clipboard!</span>
+    <span id="toastMessage">已複製到剪貼簿！</span>
   </div>
 
-  <!-- Name Edit Modal -->
+  <!-- Profile Edit Modal -->
   <dialog class="custom-modal" id="nameEditModal">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>Edit Your Name</h3>
-        <button class="close-modal-btn" id="closeModalBtn" aria-label="Close modal">✕</button>
+        <h3>編輯個人基本資料</h3>
+        <button class="close-modal-btn" id="closeModalBtn" aria-label="關閉視窗">✕</button>
       </div>
       <form id="nameEditForm">
-        <p class="modal-desc">Personalize your page. Your name is saved directly in your browser.</p>
+        <p class="modal-desc">自訂您的個人主頁資訊，修改後將自動儲存於瀏覽器中。</p>
+        
         <div class="input-group">
-          <label for="nameInput">Your Display Name</label>
-          <input type="text" id="nameInput" maxlength="32" placeholder="e.g. Alex Morgan, Maya, Jordan" required autofocus>
+          <label for="nameInput">您的姓名 / 暱稱 (Name)</label>
+          <input type="text" id="nameInput" maxlength="32" placeholder="例如：hiskdk、王小明" required>
         </div>
+
+        <div class="input-group">
+          <label for="deptInput">科系與專長領域 (Department & Specialty)</label>
+          <input type="text" id="deptInput" maxlength="60" placeholder="例如：資訊工程系 • AIoT & Software" required>
+        </div>
+
+        <div class="input-group">
+          <label for="bioInput">簡短自我介紹 (Short Bio)</label>
+          <textarea id="bioInput" rows="3" maxlength="160" placeholder="寫幾句關於你自己的介紹與興趣..." required></textarea>
+        </div>
+
         <div class="modal-buttons">
-          <button type="button" class="btn-secondary" id="cancelModalBtn">Cancel</button>
-          <button type="submit" class="btn-primary">Save Changes</button>
+          <button type="button" class="btn-secondary" id="cancelModalBtn">取消</button>
+          <button type="submit" class="btn-primary">儲存並更新</button>
         </div>
       </form>
     </div>

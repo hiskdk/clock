@@ -24,7 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const greetingIconEl = document.getElementById('greetingIcon');
   const greetingTextEl = document.getElementById('greetingText');
   const userNameEl = document.getElementById('userName');
+  const userDeptEl = document.getElementById('userDept');
+  const taglineEl = document.getElementById('tagline');
   const editNameBtn = document.getElementById('editNameBtn');
+  const navEditBtn = document.getElementById('navEditBtn');
   const avatarLetterEl = document.getElementById('avatarLetter');
 
   // Analog Hands
@@ -36,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const nameEditModal = document.getElementById('nameEditModal');
   const nameEditForm = document.getElementById('nameEditForm');
   const nameInput = document.getElementById('nameInput');
+  const deptInput = document.getElementById('deptInput');
+  const bioInput = document.getElementById('bioInput');
   const closeModalBtn = document.getElementById('closeModalBtn');
   const cancelModalBtn = document.getElementById('cancelModalBtn');
 
@@ -61,58 +66,76 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Inspirational Quotes Pool
   const quotes = [
-    { text: "Time is not what we spend, but the canvas on which we craft our lives.", author: "Daily Reflection" },
-    { text: "The future depends on what you do today.", author: "Mahatma Gandhi" },
-    { text: "Your time is limited, so don't waste it living someone else's life.", author: "Steve Jobs" },
-    { text: "Focus is a muscle; practice brings clarity.", author: "Deep Work" },
-    { text: "Every second is a chance to begin anew.", author: "Mindful Living" },
-    { text: "Simplicity is the ultimate sophistication.", author: "Leonardo da Vinci" }
+    { text: "時間不是我們所花費的事物，而是我們塑造生命與創造價值的畫布。", author: "每日反思" },
+    { text: "未來的模樣，取決於你今天所做的每一項微小努力。", author: "持之以恆" },
+    { text: "專注是思考的肌肉，每天的刻意練習將帶來無可比擬的清晰感。", author: "深度工作" },
+    { text: "每一秒鐘，都是生命重新出發、探索新領域的契機。", author: "科技探索" },
+    { text: "極簡與優雅，是複雜科技達到極致時的必然境界。", author: "達文西" },
+    { text: "在萬物互聯的時代，每一個節點都在譜寫智慧的樂章。", author: "AIoT 2026" }
   ];
 
   /* --------------------------------------------------------------------------
-     Name Management & Persistence
+     Profile Management & Persistence
      -------------------------------------------------------------------------- */
-  function loadSavedName() {
-    const savedName = localStorage.getItem('personal_user_name') || 'Alex Morgan';
-    updateNameDisplay(savedName);
+  function loadSavedProfile() {
+    const savedName = localStorage.getItem('personal_user_name') || 'hiskdk';
+    const savedDept = localStorage.getItem('personal_user_dept') || '資訊工程系 • AIoT & Embedded Intelligence';
+    const savedBio = localStorage.getItem('personal_user_bio') || '熱愛物聯網與智慧系統開發，致力於探索軟硬整合與現代 Web 互動體驗。';
+    
+    updateProfileDisplay(savedName, savedDept, savedBio);
   }
 
-  function updateNameDisplay(name) {
-    const cleanName = name.trim() || 'Alex Morgan';
+  function updateProfileDisplay(name, dept, bio) {
+    const cleanName = name.trim() || 'hiskdk';
+    const cleanDept = dept.trim() || '資訊工程系 • AIoT & Embedded Intelligence';
+    const cleanBio = bio.trim() || '熱愛物聯網與智慧系統開發，致力於探索軟硬整合與現代 Web 互動體驗。';
+
     userNameEl.textContent = cleanName;
+    userDeptEl.textContent = cleanDept;
+    taglineEl.textContent = cleanBio;
+
     const initial = cleanName.charAt(0).toUpperCase();
-    avatarLetterEl.textContent = initial || 'A';
+    avatarLetterEl.textContent = initial || 'H';
+
     localStorage.setItem('personal_user_name', cleanName);
+    localStorage.setItem('personal_user_dept', cleanDept);
+    localStorage.setItem('personal_user_bio', cleanBio);
   }
 
-  function openNameModal() {
+  function openProfileModal() {
     nameInput.value = userNameEl.textContent;
+    deptInput.value = userDeptEl.textContent;
+    bioInput.value = taglineEl.textContent;
     nameEditModal.showModal();
     nameInput.select();
   }
 
-  function closeNameModal() {
+  function closeProfileModal() {
     nameEditModal.close();
   }
 
-  userNameEl.addEventListener('click', openNameModal);
+  userNameEl.addEventListener('click', openProfileModal);
   userNameEl.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      openNameModal();
+      openProfileModal();
     }
   });
-  editNameBtn.addEventListener('click', openNameModal);
-  closeModalBtn.addEventListener('click', closeNameModal);
-  cancelModalBtn.addEventListener('click', closeNameModal);
+  editNameBtn.addEventListener('click', openProfileModal);
+  if (navEditBtn) navEditBtn.addEventListener('click', openProfileModal);
+  closeModalBtn.addEventListener('click', closeProfileModal);
+  cancelModalBtn.addEventListener('click', closeProfileModal);
 
   nameEditForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const newName = nameInput.value.trim();
+    const newDept = deptInput.value.trim();
+    const newBio = bioInput.value.trim();
+
     if (newName) {
-      updateNameDisplay(newName);
-      closeNameModal();
-      showToast(`Welcome, ${newName}!`);
+      updateProfileDisplay(newName, newDept, newBio);
+      closeProfileModal();
+      showToast(`個人資料已成功更新！`);
     }
   });
 
@@ -378,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --------------------------------------------------------------------------
      Initialization
      -------------------------------------------------------------------------- */
-  loadSavedName();
+  loadSavedProfile();
   initTheme();
   updateFormatUI();
   
