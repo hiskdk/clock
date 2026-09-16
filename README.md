@@ -6,7 +6,6 @@
 
 ---
 
-## 📌 作業要求落實 (DIC-1 Requirements)
 
 ### 👤 1. Profile（個人資訊）
 - **姓名／暱稱**：`hiskdk`
