@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="violet">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personal Dashboard with real-time live clock, dynamic greeting, day progress, and customizable themes.">
+  <title>Personal Hub • Live Time & Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow orb-1" aria-hidden="true"></div>
+  <div class="ambient-glow orb-2" aria-hidden="true"></div>
+  <div class="ambient-glow orb-3" aria-hidden="true"></div>
+
+  <div class="app-container">
+    <!-- Top Navigation / Toolbar -->
+    <header class="top-nav">
+      <div class="brand-badge">
+        <span class="status-indicator"></span>
+        <span class="brand-text">Personal Space</span>
+      </div>
+
+      <!-- Theme Switcher & Settings -->
+      <div class="nav-actions">
+        <div class="theme-picker" id="themePicker" title="Change Theme Palette">
+          <button class="theme-dot active" data-theme="violet" aria-label="Violet Theme" style="--dot-color: #8b5cf6;"></button>
+          <button class="theme-dot" data-theme="cyan" aria-label="Cyan Aurora Theme" style="--dot-color: #06b6d4;"></button>
+          <button class="theme-dot" data-theme="amber" aria-label="Sunset Amber Theme" style="--dot-color: #f59e0b;"></button>
+          <button class="theme-dot" data-theme="emerald" aria-label="Emerald Matrix Theme" style="--dot-color: #10b981;"></button>
+        </div>
+
+        <button class="icon-btn" id="formatToggleBtn" title="Toggle 12h / 24h format" aria-label="Toggle 12h/24h format">
+          <span class="format-badge" id="formatBadge">24H</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="dashboard-grid">
+      <!-- Profile & Welcome Section -->
+      <section class="glass-card profile-card" id="profileCard">
+        <div class="profile-header">
+          <div class="avatar-ring">
+            <div class="avatar-glow"></div>
+            <div class="avatar-inner" id="avatarLetter">A</div>
+          </div>
+          <div class="greeting-content">
+            <div class="greeting-tag">
+              <span class="greeting-icon" id="greetingIcon">✨</span>
+              <span class="greeting-text" id="greetingText">Good Morning</span>
+            </div>
+            <div class="name-wrapper">
+              <h1 class="user-name" id="userName" title="Click to edit name" tabindex="0">Alex Morgan</h1>
+              <button class="edit-name-btn" id="editNameBtn" aria-label="Edit display name" title="Edit your name">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                </svg>
+              </button>
+            </div>
+            <p class="tagline" id="tagline">Welcome back to your personal sanctuary</p>
+          </div>
+        </div>
+
+        <div class="quick-stats-row">
+          <div class="stat-pill">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span id="timezoneDisplay">Detecting timezone...</span>
+          </div>
+
+          <div class="stat-pill">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <span id="dayOfYearDisplay">Day 0 of year</span>
+          </div>
+
+          <div class="stat-pill live-badge">
+            <span class="pulse-dot"></span>
+            <span>LIVE SYNC</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hero Real-Time Clock Display -->
+      <section class="glass-card time-hero-card" id="timeCard">
+        <div class="time-header">
+          <div class="section-label">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>CURRENT TIME</span>
+          </div>
+          <span class="timezone-chip" id="gmtOffsetChip">UTC+00:00</span>
+        </div>
+
+        <div class="clock-display-group">
+          <div class="digital-time-wrapper">
+            <div class="time-numbers" id="timeDigits">
+              <span class="time-segment hours" id="hours">10</span>
+              <span class="time-separator">:</span>
+              <span class="time-segment minutes" id="minutes">00</span>
+              <span class="time-separator">:</span>
+              <span class="time-segment seconds" id="seconds">00</span>
+            </div>
+            <div class="meridiem-badge" id="ampmBadge">AM</div>
+          </div>
+          
+          <div class="current-date-row">
+            <span class="date-weekday" id="dateWeekday">Wednesday</span>
+            <span class="date-bullet">•</span>
+            <span class="date-full" id="dateFull">September 16, 2026</span>
+          </div>
+        </div>
+
+        <!-- Progress Tracking: Day & Year -->
+        <div class="progress-section">
+          <div class="progress-item">
+            <div class="progress-meta">
+              <span class="progress-title">Today's Journey</span>
+              <span class="progress-percent" id="dayPercent">0%</span>
+            </div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill day-bar" id="dayProgressBar" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <div class="progress-item">
+            <div class="progress-meta">
+              <span class="progress-title">Year Progress</span>
+              <span class="progress-percent" id="yearPercent">0%</span>
+            </div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill year-bar" id="yearProgressBar" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Analog Clock Visual Card -->
+      <section class="glass-card analog-card" id="analogCard">
+        <div class="section-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 2a10 10 0 1 0 10 10"></path>
+          </svg>
+          <span>CHRONOMETER</span>
+        </div>
+
+        <div class="analog-clock-container">
+          <div class="analog-clock" id="analogClock">
+            <div class="clock-face">
+              <!-- Hour marks generated via CSS / markup -->
+              <span class="clock-dial-mark mark-12">12</span>
+              <span class="clock-dial-mark mark-3">3</span>
+              <span class="clock-dial-mark mark-6">6</span>
+              <span class="clock-dial-mark mark-9">9</span>
+              <div class="dial-subticks"></div>
+            </div>
+            <!-- Clock Hands -->
+            <div class="hand hour-hand" id="analogHour"></div>
+            <div class="hand minute-hand" id="analogMinute"></div>
+            <div class="hand second-hand" id="analogSecond"></div>
+            <div class="clock-center-pin"></div>
+          </div>
+        </div>
+
+        <div class="analog-footer">
+          <span class="mil-time" id="militaryTime">10:00:00 UTC+8</span>
+          <span class="clock-tick-status">Continuous Sweep</span>
+        </div>
+      </section>
+
+      <!-- Quick Launch & Focus Dock -->
+      <section class="glass-card dock-card" id="dockCard">
+        <div class="section-label">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>QUICK ACTIONS</span>
+        </div>
+
+        <div class="dock-actions">
+          <button class="dock-item" id="copyTimeBtn" title="Copy current timestamp">
+            <div class="dock-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </div>
+            <span class="dock-label">Copy Time</span>
+          </button>
+
+          <button class="dock-item" id="focusModeBtn" title="Toggle Fullscreen Focus Clock">
+            <div class="dock-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+              </svg>
+            </div>
+            <span class="dock-label">Focus Mode</span>
+          </button>
+
+          <button class="dock-item" id="soundToggleBtn" title="Toggle gentle clock chime / ticks">
+            <div class="dock-icon" id="soundIcon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+                <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"></path>
+                <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"></path>
+                <line x1="12" y1="19" x2="12" y2="23"></line>
+                <line x1="8" y1="23" x2="16" y2="23"></line>
+              </svg>
+            </div>
+            <span class="dock-label" id="soundLabel">Sound Off</span>
+          </button>
+
+          <button class="dock-item" id="quoteRefreshBtn" title="Inspire me">
+            <div class="dock-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"></path>
+              </svg>
+            </div>
+            <span class="dock-label">New Spark</span>
+          </button>
+        </div>
+
+        <div class="quote-container">
+          <p class="quote-text" id="quoteText">"Time is not what we spend, but the canvas on which we craft our lives."</p>
+          <span class="quote-author" id="quoteAuthor">— Daily Reflection</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Designed with precision • Instant Live Updates • <span id="localTimestampSmall"></span></p>
+    </footer>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-notification" id="toastNotification" aria-live="polite">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span id="toastMessage">Copied to clipboard!</span>
+  </div>
+
+  <!-- Name Edit Modal -->
+  <dialog class="custom-modal" id="nameEditModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Edit Your Name</h3>
+        <button class="close-modal-btn" id="closeModalBtn" aria-label="Close modal">✕</button>
+      </div>
+      <form id="nameEditForm">
+        <p class="modal-desc">Personalize your page. Your name is saved directly in your browser.</p>
+        <div class="input-group">
+          <label for="nameInput">Your Display Name</label>
+          <input type="text" id="nameInput" maxlength="32" placeholder="e.g. Alex Morgan, Maya, Jordan" required autofocus>
+        </div>
+        <div class="modal-buttons">
+          <button type="button" class="btn-secondary" id="cancelModalBtn">Cancel</button>
+          <button type="submit" class="btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
